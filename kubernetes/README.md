@@ -1,10 +1,7 @@
 # Kubernetes Dashboard
 ```
-# Non TLS version
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta2/aio/deploy/alternative.yaml
-
 # TLS version (requires a few extra steps, check https://github.com/kubernetes/dashboard)
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta2/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc5/aio/deploy/recommended.yaml
 
 # Overrides the installed ServiceAccount with one with admin credentials
 kubectl delete -f dashboard/admin-rbac.yaml
@@ -15,10 +12,11 @@ kubectl apply -f dashboard/endpoint.yaml
 ```
 
 You can now navigate to the dashboard from outside your cluster by finding the exposed NodePort high port
-In the below example, the high port is 31648, and visiting the dashboard through: http://node-ip-address:31648/
+In the below example, the high port is 31648, and visiting the dashboard through: http://node-ip-address:30001/
 ```
 $ kubectl get services --all-namespaces | grep kubernetes-dashboard
-kube-system   kubernetes-dashboard   NodePort    10.97.125.254    <none>        80:31648/TCP    10m
+kubernetes-dashboard   dashboard-metrics-scraper   ClusterIP   10.103.201.46    <none>        8000/TCP                 5d9h
+kubernetes-dashboard   kubernetes-dashboard        NodePort    10.111.64.121    <none>        80:30001/TCP             5d9h
 ```
 
 # Helm
