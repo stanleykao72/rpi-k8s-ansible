@@ -1,0 +1,4 @@
+cp bootstrap/wpa_supplicant.conf /Volumes/boot/
+cp bootstrap/ssh /Volumes/boot/
+sync
+sudo diskutil umountDisk /dev/disk2

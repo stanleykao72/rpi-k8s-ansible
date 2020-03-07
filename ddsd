@@ -1,0 +1,2 @@
+sudo diskutil umountDisk /dev/disk2
+sudo dd bs=16m if=2020-02-13-raspbian-buster-lite.img of=/dev/rdisk2 conv=sync

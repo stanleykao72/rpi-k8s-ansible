@@ -7,11 +7,12 @@
 
 - name: ensure mount directory exists
   file:
-    path: "{{ server_mount_dir }}"
+    path: "{{ item }}"
     state: directory
     owner: root
     group: root
     mode: 0777
+  with_items: "{{ mount_dir }}"
   tags:
     - configure
 
@@ -19,7 +20,8 @@
   lineinfile:
     path: /etc/exports
     insertafter: EOF
-    line: "{{ server_mount_dir }} *(rw,sync,no_subtree_check,all_squash,anonuid=0,anongid=0)"
+    line: "{{ item }} *(rw,sync,no_subtree_check,all_squash,anonuid=0,anongid=0)"
+  with_items: "{{ mount_dir }}"
   tags:
     - configure
 
