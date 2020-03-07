@@ -1,5 +1,6 @@
 ---
 nfs_server_packages:
+<<<<<<< HEAD
   - "nfs-common"
   - "nfs-kernel-server"
 
@@ -15,3 +16,13 @@ server_mount_dir: "/mnt/kube_default_pv"
 client_mount_dir: "/mnt/kube_default_pv"
 server_mount_dir1: "/mnt/k8s_pv"
 client_mount_dir1: "/mnt/k8s_pv"
+=======
+- "nfs-common"
+- "nfs-kernel-server"
+
+nfs_client_packages:
+- "nfs-common"
+
+server_mount_dir: "/mnt/kube_default_pv"
+client_mount_dir: "/mnt/kube_default_pv"
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2

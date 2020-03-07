@@ -7,20 +7,35 @@
 
 - name: ensure mount directory exists
   file:
+<<<<<<< HEAD
     path: "{{ item }}"
+=======
+    path: "{{ client_mount_dir }}"
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2
     state: directory
     owner: root
     group: root
     mode: 0777
+<<<<<<< HEAD
   with_items: "{{ mount_dir }}"
+=======
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2
   tags:
     - configure
 
 - name: mount the server dir
   mount:
+<<<<<<< HEAD
     path: "{{ item }}"
     src: "{{ master_ip }}:{{ item }}"
     fstype: nfs
     opts: rw
     state: mounted
   with_items: "{{ mount_dir }}"
+=======
+    path: "{{ client_mount_dir }}"
+    src: "{{ master_ip }}:{{ server_mount_dir }}"
+    fstype: nfs
+    opts: rw
+    state: mounted
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2

@@ -8,11 +8,27 @@ all:
     ansible_python_interpreter: /usr/bin/python3
   hosts:
     node00:
+<<<<<<< HEAD
       ansible_host: 10.0.4.140
     node01:
       ansible_host: 10.0.4.141
     node02:
       ansible_host: 10.0.4.142
+=======
+      ansible_host: 192.168.60.60
+    node01:
+      ansible_host: 192.168.60.61
+    node02:
+      ansible_host: 192.168.60.62
+    node03:
+      ansible_host: 192.168.60.63
+    node04:
+      ansible_host: 192.168.60.64
+    node05:
+      ansible_host: 192.168.60.65
+    node06:
+      ansible_host: 192.168.60.66
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2
   children:
     k8s_master:
       hosts:
@@ -23,13 +39,33 @@ all:
       hosts:
         node01:
         node02:
+<<<<<<< HEAD
       vars:
         node: "slave"
         master_ip: 10.0.4.140
+=======
+        node03:
+        node04:
+        node05:
+        node06:
+      vars:
+        node: "slave"
+        master_ip: 192.168.60.60
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2
     rpi3bp:
       hosts:
         node00:
         node01:
+<<<<<<< HEAD
     rpi3b:
       hosts:
         node02:
+=======
+        node02:
+    rpi3b:
+      hosts:
+        node03:
+        node04:
+        node05:
+        node06:
+>>>>>>> 6574f80c3d9a7591258ca454f9fd617cf1769fc2

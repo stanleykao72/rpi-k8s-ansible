@@ -1,3 +1,6 @@
+# reference
+  https://github.com/michael-robbins/rpi-k8s-ansible
+
 # rpi-k8s-ansible
 Raspberry PI's running Kubernetes deployed with Ansible
 
@@ -5,8 +8,8 @@ Masters:
 - rPi 3b+ x1
 
 Workers:
-- rPi 3b+ x2
-- rPi 3b x4
+- rPi 3b+ x1
+- rPi 3b x1
 
 CNI: Weave (Flannel is dead, last commits 1+ years ago)
 
@@ -20,7 +23,7 @@ $ sudo dd if=YYYY-MM-DD-raspbian-buster-lite.img of=/dev/sdX bs=16M status=progr
 $ cat bootstrap/wpa_supplicant.conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
-country=AU
+country=TW
 
 network={
     ssid=""
@@ -34,21 +37,19 @@ $ cp bootstrap/wpa_supplicant.conf /mnt/boot/
 $ cp bootstrap/ssh /mnt/boot/ssh
 ```
 
-```
 Example flash and ssh/wifi:
-sudo umount /media/<user>/boot
-sudo umount /media/<user>/rootfs
-sudo dd if=2020-02-13-raspbian-stretch-lite.img of=/dev/<disk> bs=16M status=progress
+sudo diskutil umountDisk /dev/disk2
+sudo dd bs=16m if=2020-02-13-raspbian-buster-lite.img of=/dev/rdisk2 conv=sync
 sync
 
 # Unplug/replug SD card
 
-cp bootstrap/wpa_supplicant.conf /media/<user>/boot/
-cp bootstrap/ssh /media/<user>/boot/
+cp bootstrap/wpa_supplicant.conf /Volumes/boot/
+cp bootstrap/ssh /Volumes/boot/
 
 sync
-sudo umount /media/<user>/boot
-sudo umount /media/<user>/rootfs
+sudo diskutil umountDisk /dev/disk2
+
 ```
 
 ## Updating cluster.yml to match your environment
@@ -178,4 +179,9 @@ kube_version: "1.15.1-00"
 ## Upgrade the kubeXYZ tooling
 ```
 ansible-playbook -i cluster.yml site.yml --tags upgrade,kubernetes
+```
+
+## and NFS
+```
+ansible-playbook -i cluster.yml nfs.yml --tags configure
 ```
